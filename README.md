@@ -44,3 +44,10 @@
 
 Вывод в терминал в виде таблицы/сохранить в файл .csv:  
 `-o {pretty,file}, --output {pretty,file}`  
+
+### Как запускать
+
+`python src/main.py {режим работы парсера} [-ключ аргумент]`  
+
+пример:  
+`python src/main.py pep -o pretty `  

@@ -1,3 +1,4 @@
+import collections
 import re
 import logging
 from urllib.parse import urljoin
@@ -122,7 +123,7 @@ def pep(session):
     tbody_tag = find_tag(section_tag, 'tbody')
     tr_tags = tbody_tag.find_all('tr')
 
-    status_count = dict()
+    status_count = collections.defaultdict(int)
     total = 0
     results = [('Статус', 'Количество')]
 
@@ -145,10 +146,7 @@ def pep(session):
             if dt_tag.text == 'Status:':
                 total += 1
                 status = dt_tag.find_next_sibling().string
-                if status in status_count:
-                    status_count[status] += 1
-                if status not in status_count:
-                    status_count[status] = 1
+                status_count[status] += 1
                 if status not in EXPECTED_STATUS[preview_status]:
                     error_msg = (
                         'Несовпадающие статусы:\n'
@@ -157,8 +155,8 @@ def pep(session):
                         f'Ожидаемые статусы: {EXPECTED_STATUS[preview_status]}'
                     )
                     logging.warning(error_msg)
-    for status in status_count:
-        results.append((status, status_count[status]))
+
+    results.extend([(status, count) for status, count in status_count.items()])
     results.append(('Total', total))
     return results
 
