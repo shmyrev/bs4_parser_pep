@@ -13,7 +13,7 @@
 ### Как пользоваться  
 
 Скачать проект:  
-`https://github.com/K3llar/bs4_parser_pep.git`  
+`https://github.com/shmyrev/bs4_parser_pep.git`  
 Перейти в директорию проекта:  
 `cd bs4_parser_pep`  
 Создать виртуальное окружение:  
